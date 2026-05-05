@@ -1,0 +1,1 @@
+Site complet: aceeași structură, cu descrieri complete la secțiunea Tradiții importante.
