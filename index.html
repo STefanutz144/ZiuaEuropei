@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <title>Olanda & Luxemburg | Ziua Europei</title>
+  <style>
+    :root{
+      --blue:#2454a6;
+      --orange:#f28c28;
+      --bg:#f6f8fc;
+      --text:#172033;
+      --muted:#5c6675;
+      --border:#e2e8f0;
+      --green:#22c55e;
+      --red:#ef4444;
+      --shadow:0 10px 26px rgba(15,23,42,.08);
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif;-webkit-tap-highlight-color:transparent;}
+    body{background:var(--bg);color:var(--text);line-height:1.6;font-size:16px;overflow-x:hidden;}
+
+    nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.96);border-bottom:1px solid var(--border);box-shadow:0 4px 16px rgba(0,0,0,.04);}
+    .nav-inner{width:min(1120px,94%);margin:auto;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;}
+    .logo{font-size:18px;font-weight:900;color:var(--blue);white-space:nowrap;}
+    .menu{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;}
+    .menu button{border:0;background:#eef2f7;color:var(--text);padding:10px 14px;border-radius:999px;font-weight:900;cursor:pointer;min-height:42px;}
+    .menu button.active{background:var(--blue);color:white;}
+
+    main{width:min(1120px,94%);margin:20px auto 42px;}
+    .page{display:none;animation:fade .18s ease;}
+    .page.active{display:block;}
+    @keyframes fade{from{opacity:0;transform:translateY(5px);}to{opacity:1;transform:translateY(0);}}
+
+    .hero{background:linear-gradient(135deg,#ffffff,#eaf2ff);border:1px solid var(--border);border-radius:24px;box-shadow:var(--shadow);padding:34px;display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center;}
+    .badge{display:inline-block;padding:8px 13px;border-radius:999px;background:#fff3e4;color:#8a4b00;font-weight:900;margin-bottom:14px;font-size:14px;}
+    h1{font-size:clamp(32px,5vw,58px);line-height:1.05;margin-bottom:16px;}
+    .lead{font-size:18px;color:var(--muted);max-width:760px;}
+    .hero-card{background:white;border:1px solid var(--border);border-radius:20px;padding:20px;}
+    .hero-card h2{color:var(--blue);margin-bottom:12px;font-size:24px;}
+    .quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;}
+    .quick{background:#f8fafc;border:1px solid var(--border);border-radius:16px;padding:14px;font-weight:900;text-align:center;}
+
+    .section{background:white;border:1px solid var(--border);border-radius:24px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:22px;}
+    .section-head{padding:22px;background:#fbfcff;border-bottom:1px solid var(--border);}
+    .section-head h2{font-size:31px;color:var(--blue);margin-bottom:8px;line-height:1.15;}
+    .section-head p{color:var(--muted);max-width:850px;}
+    .section-body{padding:22px;}
+
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+    .card{background:#f8fafc;border:1px solid var(--border);border-radius:18px;padding:18px;}
+    .card h3{font-size:22px;margin-bottom:8px;line-height:1.2;}
+    .card p{color:#4b5563;}
+
+    .tradition-list{display:grid;gap:16px;}
+    .tradition{border:1px solid var(--border);border-radius:18px;padding:20px;background:#ffffff;}
+    .tradition h3{font-size:24px;margin-bottom:10px;line-height:1.25;}
+    .tradition p{color:#4b5563;margin-bottom:10px;}
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px;}
+    .mini{background:#f8fafc;border:1px solid var(--border);border-radius:15px;padding:14px;}
+    .mini strong{display:block;color:var(--blue);margin-bottom:6px;}
+    ul{padding-left:20px;color:#4b5563;}
+    .pill{display:inline-block;background:#eef4ff;color:var(--blue);padding:7px 10px;border-radius:999px;font-weight:900;font-size:13px;margin:4px 4px 0 0;}
+
+    .facts-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
+    .fact{background:#f8fafc;border:1px solid var(--border);border-radius:18px;padding:18px;}
+    .fact h3{font-size:20px;margin-bottom:8px;color:#172033;line-height:1.25;}
+    .fact p{color:#4b5563;}
+
+    .quiz-layout{display:grid;grid-template-columns:.85fr 1.15fr;gap:18px;align-items:start;}
+    .quiz-info,.quiz-box{background:white;border:1px solid var(--border);border-radius:20px;padding:22px;}
+    .quiz-info{background:#f8fafc;}
+    .quiz-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px;}
+    .progress{background:#f1f5f9;padding:7px 10px;border-radius:999px;color:var(--muted);font-size:14px;white-space:nowrap;}
+    #question{font-size:24px;font-weight:900;line-height:1.35;margin:12px 0 16px;}
+    .answers{display:grid;gap:10px;}
+    .answer-btn{border:2px solid var(--border);border-radius:15px;background:#f8fafc;color:var(--text);padding:15px;text-align:left;cursor:pointer;font-size:16px;min-height:54px;}
+    .answer-btn.correct{background:#dcfce7;border-color:var(--green);}
+    .answer-btn.wrong{background:#fee2e2;border-color:var(--red);}
+    .controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;}
+    .primary,.secondary{border:0;border-radius:15px;padding:13px 18px;cursor:pointer;font-weight:900;font-size:16px;min-height:48px;}
+    .primary{background:var(--blue);color:white;}
+    .secondary{background:#f1f5f9;color:var(--text);}
+    .feedback{color:#4b5563;min-height:28px;margin-top:12px;}
+    .result{display:none;text-align:center;background:#f8fafc;border:1px solid var(--border);border-radius:18px;padding:22px;}
+    .score{font-size:48px;font-weight:900;color:var(--blue);margin:8px 0;}
+
+    footer{text-align:center;color:var(--muted);padding:28px 10px;background:white;border-top:1px solid var(--border);}
+
+    @media(max-width:900px){.hero,.cards,.split,.quiz-layout,.facts-grid{grid-template-columns:1fr;}}
+    @media(max-width:720px){
+      .nav-inner{width:100%;padding:10px 12px 12px;flex-direction:column;align-items:stretch;}
+      .logo{text-align:center;font-size:17px;}
+      .menu{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;width:100%;}
+      .menu button{width:100%;padding:10px 6px;font-size:13px;min-height:44px;border-radius:13px;}
+      main{width:100%;margin:14px auto 34px;padding:0 10px;}
+      .hero{padding:22px;border-radius:20px;}
+      h1{font-size:33px;}
+      .lead{font-size:16px;}
+      .quick-grid{grid-template-columns:1fr 1fr;gap:9px;}
+      .section{border-radius:20px;margin-bottom:16px;}
+      .section-head,.section-body{padding:16px;}
+      .section-head h2{font-size:25px;}
+      .tradition{padding:16px;}
+      .tradition h3,#question{font-size:20px;}
+      .answer-btn{min-height:58px;}
+      .controls{display:grid;grid-template-columns:1fr 1fr;}
+    }
+    @media(max-width:430px){.menu{grid-template-columns:repeat(2,1fr);}h1{font-size:30px;}.quick-grid{grid-template-columns:1fr;}.quiz-top{flex-direction:column;align-items:flex-start;}}
+  
+/* Optimizare finală pentru telefon */
+@media(max-width:720px){
+  body{
+    font-size:16px;
+    background:#f7f8fc;
+  }
+
+  nav{
+    position:sticky;
+    top:0;
+  }
+
+  .nav-inner{
+    width:100%;
+    padding:10px 10px 12px;
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .logo{
+    text-align:center;
+    font-size:17px;
+    padding:2px 0;
+  }
+
+  .menu{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:8px;
+    width:100%;
+  }
+
+  .menu button{
+    width:100%;
+    min-height:46px;
+    border-radius:14px;
+    font-size:14px;
+    padding:11px 8px;
+  }
+
+  main{
+    width:100%;
+    margin:12px auto 34px;
+    padding:0 10px;
+  }
+
+  .hero{
+    padding:20px;
+    border-radius:20px;
+    grid-template-columns:1fr;
+    gap:16px;
+  }
+
+  h1{
+    font-size:29px;
+    line-height:1.08;
+    letter-spacing:-0.4px;
+  }
+
+  .lead{
+    font-size:16px;
+    line-height:1.55;
+  }
+
+  .hero-card{
+    padding:16px;
+    border-radius:18px;
+  }
+
+  .hero-card h2{
+    font-size:21px;
+  }
+
+  .quick-grid{
+    grid-template-columns:1fr;
+    gap:9px;
+  }
+
+  .quick{
+    padding:12px;
+    border-radius:14px;
+  }
+
+  .section{
+    border-radius:20px;
+    margin-bottom:16px;
+  }
+
+  .section-head,
+  .section-body{
+    padding:16px;
+  }
+
+  .section-head h2{
+    font-size:24px;
+    line-height:1.15;
+  }
+
+  .section-head p,
+  .card p,
+  .tradition p,
+  .fact p,
+  .mini,
+  li{
+    font-size:15.5px;
+  }
+
+  .cards,
+  .facts-grid,
+  .split,
+  .quiz-layout{
+    grid-template-columns:1fr !important;
+    gap:11px;
+  }
+
+  .card,
+  .fact,
+  .tradition,
+  .mini,
+  .quiz-info,
+  .quiz-box{
+    border-radius:16px;
+    padding:15px;
+  }
+
+  .card h3,
+  .fact h3{
+    font-size:19px;
+  }
+
+  .tradition h3{
+    font-size:20px;
+  }
+
+  .pill{
+    font-size:12.5px;
+    padding:7px 9px;
+  }
+
+  .quiz-top{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:8px;
+  }
+
+  #question{
+    font-size:20px;
+    line-height:1.35;
+  }
+
+  .answers{
+    gap:9px;
+  }
+
+  .answer-btn{
+    min-height:58px;
+    font-size:16px;
+    padding:15px;
+    border-radius:15px;
+  }
+
+  .controls{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:9px;
+  }
+
+  .primary,
+  .secondary{
+    width:100%;
+    min-height:50px;
+    font-size:15.5px;
+    border-radius:15px;
+    padding:14px 10px;
+  }
+
+  .score{
+    font-size:42px;
+  }
+
+  footer{
+    font-size:14px;
+    padding:24px 10px;
+  }
+}
+
+@media(max-width:360px){
+  .menu button{
+    font-size:13px;
+    padding:10px 6px;
+  }
+
+  h1{
+    font-size:27px;
+  }
+
+  .section-head h2{
+    font-size:22px;
+  }
+
+  #question,
+  .tradition h3{
+    font-size:19px;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">🇪🇺 Olanda & Luxemburg</div>
+    <div class="menu">
+      <button class="active" onclick="showPage('home', this)">Home</button>
+      <button onclick="showPage('olanda', this)">Olanda</button>
+      <button onclick="showPage('luxemburg', this)">Luxemburg</button>
+      <button onclick="showPage('quiz', this)">Quiz</button>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <div id="home" class="page active">
+    <div class="hero">
+      <div>
+        <span class="badge">Ziua Europei</span>
+        <h1>Descoperă Olanda și Luxemburg</h1>
+        <p class="lead">
+          Bine ai venit într-o călătorie scurtă prin două țări europene diferite, dar la fel de interesante.
+          Olanda impresionează prin tradiții colorate, lalele, mori de vânt și brânzeturi, iar Luxemburg
+          atrage prin castele, istorie și rolul său important în Europa.
+        </p>
+      </div>
+      <div class="hero-card">
+        <h2>Ce poți explora?</h2>
+        <p class="lead" style="font-size:16px;">Alege o pagină din meniu și descoperă informații simple, clare și ușor de reținut.</p>
+        <div class="quick-grid">
+          <div class="quick">🇳🇱 Olanda</div>
+          <div class="quick">🌷 Fun facts</div>
+          <div class="quick">🏰 Luxemburg</div>
+          <div class="quick">🎯 Quiz</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" style="margin-top:20px;">
+      <div class="section-head">
+        <h2>Introducere</h2>
+        <p>Europa este formată din țări cu obiceiuri, limbi și simboluri diferite. Prin Olanda și Luxemburg putem observa cât de diversă este cultura europeană.</p>
+      </div>
+      <div class="section-body">
+        <div class="cards">
+          <div class="card"><h3>🇳🇱 Olanda</h3><p>Țară cunoscută pentru lalele, biciclete, brânzeturi, mori de vânt, canale și orașe pline de viață.</p></div>
+          <div class="card"><h3>🇱🇺 Luxemburg</h3><p>Țară mică, dar importantă, cunoscută pentru castele, orașe istorice și instituții europene.</p></div>
+          <div class="card"><h3>🎯 Quiz</h3><p>La final poți testa rapid ce ai reținut printr-un quiz ușor și atractiv.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="olanda" class="page">
+    <section class="section">
+      <div class="section-head">
+        <h2>🇳🇱 Olanda</h2>
+        <p>Olanda este cunoscută pentru peisajele cu lalele, morile de vânt, orașele cu canale, bicicletele și tradițiile foarte vii.</p>
+      </div>
+      <div class="section-body">
+        <div class="cards">
+          <div class="card"><h3>🌷 Simboluri</h3><p>Lalelele, morile de vânt, saboții din lemn și brânzeturile sunt printre cele mai cunoscute simboluri.</p></div>
+          <div class="card"><h3>🚲 Viață de zi cu zi</h3><p>Bicicleta este foarte folosită, iar multe orașe sunt organizate pentru deplasarea rapidă pe două roți.</p></div>
+          <div class="card"><h3>🧀 Mâncare</h3><p>Olanda este renumită pentru Gouda, Edam, stroopwafel, poffertjes și alte gustări tradiționale.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>Fun Facts despre Olanda</h2>
+        <p>Lucruri scurte, interesante și ușor de reținut despre Olanda.</p>
+      </div>
+      <div class="section-body">
+        <div class="facts-grid">
+          <div class="fact"><h3>🌷 1. Țara lalelelor</h3><p>Lalelele sunt simbolul Olandei, dar provin inițial din Turcia. Olandezii le-au popularizat masiv în Europa în secolul XVII, în timpul fenomenului numit Tulip Mania.</p></div>
+          <div class="fact"><h3>🚴 2. Mai multe biciclete decât oameni</h3><p>Sunt peste 22 de milioane de biciclete la aproximativ 17 milioane de locuitori. Orașe ca Amsterdam sunt practic construite pentru ciclism.</p></div>
+          <div class="fact"><h3>🌊 3. O parte din țară e sub nivelul mării</h3><p>Aproximativ o treime din Olanda este sub nivelul mării, protejată de diguri și sisteme avansate de gestionare a apei, precum Delta Works.</p></div>
+          <div class="fact"><h3>🧀 4. Paradisul brânzeturilor</h3><p>Olanda este celebră pentru brânzeturi ca Gouda și Edam, exportate în toată lumea.</p></div>
+          <div class="fact"><h3>🌍 5. Țară foarte dens populată</h3><p>Este mică, dar foarte populată — și totuși bine organizată și verde.</p></div>
+          <div class="fact"><h3>💡 6. Țară progresistă</h3><p>Olanda a fost prima țară din lume care a legalizat căsătoria între persoane de același sex în 2001.</p></div>
+          <div class="fact"><h3>🎨 7. Artiști celebri</h3><p>Aici s-au născut artiști precum Vincent van Gogh și Rembrandt van Rijn.</p></div>
+          <div class="fact"><h3>🌬️ 8. Mori de vânt iconice</h3><p>Morile de vânt tradiționale, cum sunt cele de la Kinderdijk, erau folosite pentru pomparea apei și pentru industrie.</p></div>
+          <div class="fact"><h3>🍟 9. Cartofi prăjiți cu maioneză</h3><p>Un snack clasic olandez este porția de cartofi prăjiți cu maioneză, nu ketchup.</p></div>
+          <div class="fact"><h3>👑 10. Monarhie constituțională</h3><p>Țara are un rege: Willem-Alexander.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><h2>Olanda – atracții turistice</h2><p>Înainte să vorbim despre locurile turistice, merită să vedem simbolurile pe care le întâlnim peste tot în Olanda.</p></div>
+      <div class="section-body">
+        <div class="cards">
+          <div class="card"><h3>🌷 Laleaua</h3><p>A fost adusă din Imperiul Otoman în secolul al XVI-lea și a devenit unul dintre simbolurile Olandei.</p></div>
+          <div class="card"><h3>🧡 Portocaliul</h3><p>Este simbol al unității și al mândriei naționale, provenind de la familia regală „Casa de Orania-Nassau”.</p></div>
+          <div class="card"><h3>🌬️ Morile de vânt</h3><p>Erau folosite pentru a pompa apa din poldere și pentru a măcina cereale.</p></div>
+        </div>
+
+        <div class="tradition-list" style="margin-top:16px;">
+          <article class="tradition"><h3>1. Amsterdam – capitala</h3><p>Amsterdam este unul dintre cele mai cunoscute orașe din Europa. Aici bicicletele sunt peste tot, iar în unele zone sunt chiar mai numeroase decât oamenii.</p><p>Între 12.000 și 15.000 de biciclete ajung anual în canalele orașului, iar primăria trebuie să le scoată cu bărci speciale prevăzute cu „gheare” metalice.</p><p>Orașul are peste 100 km de canale și peste 1.500 de poduri. Amsterdam este cunoscut și pentru muzeele sale, precum Rijksmuseum și Muzeul Van Gogh.</p><span class="pill">biciclete</span><span class="pill">canale</span><span class="pill">muzee</span></article>
+          <article class="tradition"><h3>2. Keukenhof – „Grădina Europei”</h3><p>Keukenhof este una dintre cele mai frumoase grădini de flori din lume și unul dintre cele mai fotografiate locuri din Europa.</p><div class="split"><div class="mini"><strong>Ce găsim acolo?</strong><ul><li>aproximativ 7 milioane de bulbi în fiecare an</li><li>aproximativ 800 de specii de lalele</li><li>32 de hectare de grădini</li></ul></div><div class="mini"><strong>De ce este special?</strong><p>Pentru că florile sunt de primăvară, Keukenhof este deschis doar aproximativ 8 săptămâni pe an, din martie până în mai.</p></div></div></article>
+          <article class="tradition"><h3>3. Kinderdijk – morile de vânt și apa</h3><p>Kinderdijk este un sat din Olanda de Sud, celebru pentru sistemul său de gestionare a apei. În jurul anului 1740 au fost construite 19 mori de vânt pentru a pompa apa din zonele joase către un rezervor mai înalt.</p><p>Numele Kinderdijk înseamnă „Digul Copilului”. Legenda spune că, după marea inundație din 1421, un sătean a găsit pe un dig un leagăn plutind cu un copil înăuntru, ținut în echilibru de o pisică.</p><span class="pill">19 mori</span><span class="pill">gestionarea apei</span><span class="pill">legendă</span></article>
+          <article class="tradition"><h3>4. Rotterdam – orașul modern</h3><p>Rotterdam este al doilea cel mai mare oraș din Olanda și are cel mai mare port al Europei. Orașul a fost distrus puternic în Al Doilea Război Mondial, iar apoi reconstruit într-un stil modern.</p><p>Aici găsim casele-cub galbene, numite Kubuswoningen, o hală alimentară uriașă în formă de potcoavă și multe clădiri experimentale.</p><div class="split"><div class="mini"><strong>Ce îl face special?</strong><ul><li>cel mai mare port al Europei</li><li>arhitectură modernă</li><li>case-cub înclinate</li></ul></div><div class="mini"><strong>Rotterdam și apa</strong><p>Poți lua o navă de croazieră pentru terminalele de containere sau un water taxi, o barcă galbenă rapidă.</p></div></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><h2>Tradiții importante</h2><p>Tradiții autentice din Olanda, explicate cu descrieri complete.</p></div>
+      <div class="section-body">
+        <div class="tradition-list">
+          <article class="tradition">
+            <h3>🎁 Sinterklaas – magia copilăriei olandeze</h3>
+            <p>În fiecare an, la începutul iernii, copiii din Olanda îl așteaptă cu emoție pe Sinterklaas. Legenda spune că acesta vine din Spania pe o navă mare și aduce cadouri copiilor cuminți.</p>
+            <p>Orașele sunt decorate cu lumini și stegulețe, iar oamenii ies pe străzi pentru a urmări paradele festive. Copiii își pregătesc pantofii lângă șemineu și lasă morcovi pentru calul lui Sinterklaas.</p>
+            <p>Dimineața, copiii găsesc dulciuri și mici surprize. Atmosfera acestei sărbători este foarte caldă, familială și plină de magie.</p>
+            <div class="split">
+              <div class="mini"><strong>Sinterklaas poartă</strong><ul><li>mantie roșie</li><li>baston auriu</li><li>mitră decorată</li></ul></div>
+              <div class="mini"><strong>Mâncăruri tradiționale</strong><ul><li>Pepernoten</li><li>marțipan</li><li>ciocolată</li></ul></div>
+            </div>
+          </article>
+
+          <article class="tradition">
+            <h3>🧡 Koningsdag – ziua portocalie a Olandei</h3>
+            <p>În ziua regelui, întreaga țară devine portocalie. Oamenii ies pe străzi îmbrăcați în haine colorate, muzica se aude peste tot, iar canalele sunt pline de bărci decorate.</p>
+            <p>Această sărbătoare este una dintre cele mai vesele tradiții olandeze. Copiii și adulții participă la târguri, concerte și petreceri în aer liber, iar atmosfera este ca la un carnaval uriaș.</p>
+            <p>Portocaliul este folosit deoarece este asociat cu familia regală olandeză, Casa de Orania-Nassau.</p>
+            <div class="split">
+              <div class="mini"><strong>Costumații</strong><ul><li>peruci portocalii</li><li>pălării haioase</li><li>haine tradiționale și moderne combinate</li></ul></div>
+              <div class="mini"><strong>Mâncăruri populare</strong><ul><li>Stroopwafel</li><li>hering</li><li>cartofi prăjiți</li></ul></div>
+            </div>
+          </article>
+
+          <article class="tradition">
+            <h3>🌷 Festivalurile lalelelor – primăvara colorată</h3>
+            <p>Primăvara, câmpurile din Olanda se umplu de milioane de lalele colorate. Oamenii vin din toate colțurile lumii pentru a vedea aceste peisaje spectaculoase.</p>
+            <p>În parcul Keukenhof sunt create aranjamente florale impresionante, iar paradele cu flori transformă orașele într-o adevărată poveste. Lalelele sunt atât de importante încât au devenit unul dintre cele mai cunoscute simboluri ale Olandei.</p>
+            <p>În unele zone rurale se păstrează costumele tradiționale, iar vizitatorii pot descoperi și produse locale.</p>
+            <div class="split">
+              <div class="mini"><strong>Costume tradiționale</strong><ul><li>bonete albe</li><li>șorțuri cusute</li><li>saboți din lemn</li></ul></div>
+              <div class="mini"><strong>Ce pot gusta vizitatorii</strong><ul><li>brânzeturi locale</li><li>deserturi tradiționale</li><li>dulciuri olandeze</li></ul></div>
+            </div>
+          </article>
+
+          <article class="tradition">
+            <h3>🧀 Piețele tradiționale de brânză</h3>
+            <p>Olanda este renumită pentru brânzeturile sale, iar în orașe precum Alkmaar au loc piețe tradiționale unde oamenii recreează comerțul de acum sute de ani.</p>
+            <p>Brânzeturile uriașe sunt transportate pe tărgi speciale de către bărbați îmbrăcați tradițional. Vizitatorii pot vedea cum se negocia odinioară și pot gusta diferite tipuri de brânză.</p>
+            <p>Aceste piețe nu sunt doar locuri de vânzare, ci și spectacole culturale care arată cât de importantă este brânza în tradiția olandeză.</p>
+            <div class="split">
+              <div class="mini"><strong>Participanții poartă</strong><ul><li>haine albe</li><li>pălării colorate</li><li>saboți tradiționali</li></ul></div>
+              <div class="mini"><strong>Brânzeturi cunoscute</strong><ul><li>Gouda</li><li>Edam</li></ul></div>
+            </div>
+          </article>
+
+          <article class="tradition">
+            <h3>🌬️ Morile de vânt și viața tradițională rurală</h3>
+            <p>Morile de vânt sunt unul dintre cele mai cunoscute simboluri ale Olandei. În trecut, ele erau folosite pentru pomparea apei și măcinarea cerealelor.</p>
+            <p>În locuri precum Kinderdijk, oamenii păstrează încă tradițiile satelor vechi. Turiștii pot vedea case tradiționale, dansuri populare și costume autentice.</p>
+            <p>Această parte a Olandei arată legătura dintre oameni, apă, agricultură și tehnicile vechi prin care olandezii au reușit să controleze natura.</p>
+            <div class="split">
+              <div class="mini"><strong>Costume</strong><ul><li>rochii lungi și colorate</li><li>bonete albe</li><li>saboți din lemn numiți „klompen”</li></ul></div>
+              <div class="mini"><strong>Mâncăruri tradiționale</strong><ul><li>supe groase</li><li>pește afumat</li><li>clătite olandeze „pannenkoeken”</li></ul></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div id="luxemburg" class="page">
+
+<section class="section">
+  <div class="section-head">
+    <h2>🇱🇺 Luxemburg – prezentare</h2>
+    <p>
+      Luxemburg este o țară mică din vestul Europei, situată între Franța,
+      Germania și Belgia. Capitala este Luxembourg City.
+    </p>
+  </div>
+
+  <div class="section-body">
+    <div class="cards">
+      <div class="card">
+        <h3>🌍 Poziție</h3>
+        <p>
+          Luxemburg se află între Franța, Germania și Belgia și este una dintre
+          cele mai mici țări din Europa.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>🏙️ Capitala</h3>
+        <p>
+          Capitala se numește Luxembourg City și este cunoscută pentru
+          fortificațiile și clădirile sale istorice.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>💶 Economie</h3>
+        <p>
+          Luxemburg este cunoscut pentru economia puternică și nivelul ridicat
+          de trai.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <h2>🏰 Atracții turistice</h2>
+    <p>
+      Deși este o țară mică, Luxemburg are multe locuri spectaculoase și pline de istorie.
+    </p>
+  </div>
+
+  <div class="section-body">
+    <div class="cards">
+      <div class="card">
+        <h3>🌆 Luxembourg Old Town</h3>
+        <p>
+          Centru istoric UNESCO, cu fortificații și priveliști spectaculoase.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>🏰 Vianden Castle</h3>
+        <p>
+          Castel medieval impresionant, foarte bine păstrat și foarte vizitat.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>🏞️ Mullerthal Region</h3>
+        <p>
+          Zonă naturală numită „Mica Elveție”, ideală pentru drumeții și natură.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>🌄 Chemin de la Corniche</h3>
+        <p>
+          Loc faimos pentru panorame, numit „cel mai frumos balcon al Europei”.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <h2>🎉 Tradiții</h2>
+    <p>Luxemburg păstrează tradiții interesante și foarte apreciate de localnici.</p>
+  </div>
+
+  <div class="section-body">
+    <div class="cards">
+      <div class="card">
+        <h3>🔥 Buergbrennen</h3>
+        <p>
+          Oamenii aprind focuri mari pentru a marca venirea primăverii.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>🎡 Schueberfouer</h3>
+        <p>
+          Târg tradițional cu distracții, jocuri și mâncare specifică.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>🥨 Bretzelsonndeg</h3>
+        <p>
+          Tradiție în care se oferă covrigi dulci ca simbol al iubirii.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <h2>🤓 Fun facts</h2>
+    <p>Lucruri interesante despre Luxemburg.</p>
+  </div>
+
+  <div class="section-body">
+    <div class="facts-grid">
+      <div class="fact">
+        <h3>👑 Mare Ducat</h3>
+        <p>Este singurul mare ducat din lume.</p>
+      </div>
+
+      <div class="fact">
+        <h3>🗣️ Trei limbi oficiale</h3>
+        <p>Luxemburgheza, franceza și germana sunt limbi oficiale.</p>
+      </div>
+
+      <div class="fact">
+        <h3>🚌 Transport gratuit</h3>
+        <p>Transportul public este gratuit în toată țara.</p>
+      </div>
+
+      <div class="fact">
+        <h3>💰 Țară bogată</h3>
+        <p>Este una dintre cele mai bogate țări din lume.</p>
+      </div>
+
+      <div class="fact">
+        <h3>🇪🇺 Uniunea Europeană</h3>
+        <p>Luxemburg are un rol important în Uniunea Europeană.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </div>
+
+  <div id="quiz" class="page">
+    <section class="section">
+      <div class="section-head"><h2>🎯 Quiz Olanda & Luxemburg</h2><p>Răspunde la întrebări ușoare și vezi cât de multe ai reținut.</p></div>
+      <div class="section-body">
+        <div class="quiz-layout">
+          <div class="quiz-info"><h3>Cum funcționează?</h3><p>Alege un răspuns, vezi dacă e corect, apoi mergi mai departe. La final primești scorul.</p></div>
+          <div class="quiz-box">
+            <div id="quizBox">
+              <div class="quiz-top"><h3>Întrebare</h3><span class="progress" id="progress">1/16</span></div>
+              <div id="question">Întrebarea apare aici</div>
+              <div class="answers" id="answers"></div>
+              <p class="feedback" id="feedback"></p>
+              <div class="controls"><button class="primary" id="nextBtn">Următoarea</button><button class="secondary" id="restartBtn">Reîncepe</button></div>
+            </div>
+            <div class="result" id="resultBox"><h3>Rezultatul tău</h3><div class="score" id="scoreText">0/16</div><p id="resultMessage"></p><div class="controls" style="justify-content:center;"><button class="primary" onclick="restartQuiz()">Mai încearcă o dată</button></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>Ziua Europei • Olanda 🇳🇱 & Luxemburg 🇱🇺</footer>
+
+<script>
+  function showPage(pageId, btn){
+    document.querySelectorAll(".page").forEach(page => page.classList.remove("active"));
+    document.getElementById(pageId).classList.add("active");
+    document.querySelectorAll(".menu button").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    window.scrollTo({top:0, behavior:"smooth"});
+  }
+
+  
+const allQuestions = [
+{q:"Ce floare este asociată cu Olanda?",a:["Laleaua","Trandafirul","Crinul","Floarea-soarelui"],correct:"Laleaua"},
+{q:"Capitala Olandei este...",a:["Amsterdam","Paris","Roma","Berlin"],correct:"Amsterdam"},
+{q:"Ce simbol are Olanda?",a:["Morile de vânt","Piramidele","Cangurii","Palmierii"],correct:"Morile de vânt"},
+{q:"Cum se numește festivalul regelui?",a:["Koningsdag","Halloween","Carnaval","Oktoberfest"],correct:"Koningsdag"},
+{q:"Ce brânză este olandeză?",a:["Gouda","Mozzarella","Feta","Parmezan"],correct:"Gouda"},
+{q:"Ce oraș are cel mai mare port din Europa?",a:["Rotterdam","Amsterdam","Praga","Viena"],correct:"Rotterdam"},
+{q:"Cum se numesc saboții tradiționali?",a:["Klompen","Kimono","Sombrero","Poncho"],correct:"Klompen"},
+{q:"Ce țară are transport public gratuit?",a:["Luxemburg","Italia","Spania","Grecia"],correct:"Luxemburg"},
+{q:"Luxemburg este...",a:["Mare Ducat","Imperiu","Regat","Continent"],correct:"Mare Ducat"},
+{q:"Ce regiune din Luxemburg este numită Mica Elveție?",a:["Mullerthal","Sahara","Alpi","Bavaria"],correct:"Mullerthal"},
+{q:"Ce culoare simbolizează Olanda?",a:["Portocaliu","Mov","Negru","Albastru"],correct:"Portocaliu"},
+{q:"Ce floare a făcut celebră Olanda?",a:["Laleaua","Margareta","Orhideea","Macul"],correct:"Laleaua"},
+{q:"Ce castel este celebru în Luxemburg?",a:["Vianden Castle","Castelul Bran","Windsor","Versailles"],correct:"Vianden Castle"},
+{q:"Ce oraș este capitala Luxemburgului?",a:["Luxembourg City","Bruxelles","Paris","Madrid"],correct:"Luxembourg City"},
+{q:"Ce sunt foarte multe în Amsterdam?",a:["Biciclete","Cămile","Taxiuri","Palmieri"],correct:"Biciclete"}
+];
+
+function shuffle(array){
+  for(let i=array.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [array[i],array[j]]=[array[j],array[i]];
+  }
+  return array;
+}
+
+let questions=[];
+let current=0;
+let score=0;
+let selected=false;
+
+const questionEl=document.getElementById("question");
+const answersEl=document.getElementById("answers");
+const feedbackEl=document.getElementById("feedback");
+const progressEl=document.getElementById("progress");
+const nextBtn=document.getElementById("nextBtn");
+const restartBtn=document.getElementById("restartBtn");
+const quizBox=document.getElementById("quizBox");
+const resultBox=document.getElementById("resultBox");
+const scoreText=document.getElementById("scoreText");
+const resultMessage=document.getElementById("resultMessage");
+
+function generateQuiz(){
+  questions=shuffle([...allQuestions]).slice(0,10).map(q=>{
+    const answers=shuffle([...q.a]);
+    return {
+      q:q.q,
+      a:answers,
+      correct:answers.indexOf(q.correct)
+    };
+  });
+}
+
+function loadQuestion(){
+  selected=false;
+  feedbackEl.textContent="";
+  const item=questions[current];
+
+  questionEl.textContent=item.q;
+  progressEl.textContent=`${current+1}/10`;
+
+  answersEl.innerHTML="";
+
+  item.a.forEach((answer,index)=>{
+    const btn=document.createElement("button");
+    btn.className="answer-btn";
+    btn.textContent=answer;
+
+    btn.onclick=()=>{
+      if(selected) return;
+      selected=true;
+
+      document.querySelectorAll(".answer-btn").forEach((b,i)=>{
+        if(i===item.correct){
+          b.classList.add("correct");
+        }
+      });
+
+      if(index===item.correct){
+        score++;
+        feedbackEl.textContent="Corect!";
+      }else{
+        btn.classList.add("wrong");
+        feedbackEl.textContent="Răspunsul corect era: "+item.a[item.correct];
+      }
+    };
+
+    answersEl.appendChild(btn);
+  });
+}
+
+function nextQuestion(){
+  if(!selected){
+    feedbackEl.textContent="Alege un răspuns.";
+    return;
+  }
+
+  if(current<questions.length-1){
+    current++;
+    loadQuestion();
+  }else{
+    showResult();
+  }
+}
+
+function showResult(){
+  quizBox.style.display="none";
+  resultBox.style.display="block";
+
+  scoreText.textContent=`${score}/10`;
+
+  if(score===10){
+    resultMessage.textContent="Perfect!";
+  }else if(score>=7){
+    resultMessage.textContent="Foarte bine!";
+  }else{
+    resultMessage.textContent="Mai încearcă!";
+  }
+}
+
+function restartQuiz(){
+  current=0;
+  score=0;
+  selected=false;
+
+  generateQuiz();
+
+  quizBox.style.display="block";
+  resultBox.style.display="none";
+
+  loadQuestion();
+}
+
+nextBtn.addEventListener("click",nextQuestion);
+restartBtn.addEventListener("click",restartQuiz);
+
+generateQuiz();
+loadQuestion();
+
+</script>
+
+</body>
+</html>
